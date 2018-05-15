@@ -1,12 +1,14 @@
 import React from 'react';
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
+import moment from "moment";
 
 
 
 const QUERY_MEMBER_OPEN_TIME_ENTRIES = gql `
     query openTimeEntries($member_id: ID!) {
         timeEntries: openTimeEntries(member_id: $member_id) {
+            id
             start_time
             end_time
             project_id
@@ -40,10 +42,10 @@ const MemberOpenTimeEntries = ({ member_id }) => {
                 console.log('timeEntries', timeEntries);
                 
                 return timeEntries.length ? (timeEntries.map(timeEntry => (
-                    <dl>
-                        <dt>start_time</dt><dd>{timeEntry.start_time}</dd>
-                        <dt>end_time</dt><dd>{timeEntry.end_time}</dd>
-                        <dt>cost_code_id</dt><dd>{timeEntry.cost_code_id}</dd>
+                    <dl key={timeEntry.id}>
+                        <dt>start_time</dt><dd>{timeEntry.start_time ? moment(timeEntry.start_time, 'X').format() : '-'}</dd>
+                        <dt>end_time</dt><dd>{timeEntry.end_time ? moment(timeEntry.end_time, 'X').format() : '-'}</dd>
+                        <dt>cost_code_id</dt><dd>{timeEntry.cost_code_id ? timeEntry.cost_code_id : '-'}</dd>
                         
                         <dt>project</dt><dd>{timeEntry.project_id ? <Project id={timeEntry.project_id} /> : 'none'}</dd>
                     </dl>
