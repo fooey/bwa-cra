@@ -1,12 +1,14 @@
-import React from 'react';
+/* eslint-disable no-console */
+
+import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
-
 import { Link } from 'react-router-dom';
 
+import Preloader from 'src/components/util/preloader';
+
 import MemberOpenTimeEntries from './member-open-time-entries';
-
-
 
 const QUERY_MEMBER = gql `
     query member($id: ID!) {
@@ -21,34 +23,52 @@ const QUERY_MEMBER = gql `
     }
 `;
 
-
 const Member = ({ match }) => {
-    console.log(match)
-    const { id } = match.params;
-    console.log({id});
-    
-    return (
-        <Query key={id} query={QUERY_MEMBER} variables={{ id }}>
-            {({ loading, error, data }) => {
-                if (loading) return <p>Loading...</p>;
-                if (error) return <p>Error :(</p>;
-                
-                const { member } = data;
-                console.log('member', member);
+	const { params, path, isExact, url } = match;
+	const { id } = params;
 
-                return (
-                    <div>
-                        <p><Link to={`/`}>back</Link></p>
-                        <h2>{member.first_name} {member.last_name}</h2>
-                        <p>{member.email}</p>
-                        {/* <p>{member.id}</p> */}
-                        
-                        <MemberOpenTimeEntries member_id={member.id} />
-                    </div>
-                );
-            }}
-        </Query>
-    )
+	console.log('Member', match);
+	console.log('Member', { path, url, isExact });
+	console.log('Member', { id });
+
+	return (
+		<Query key={id} query={QUERY_MEMBER} variables={{ id }}>
+			{({ loading, error, data }) => {
+				if (loading) return <Preloader />;
+				if (error) return <p>Error :(</p>;
+
+				const { member } = data;
+				console.log('member', member);
+
+				return (
+					<Fragment>
+						<div className="card">
+							<div className="card-content">
+								<div className="card-title">{member.first_name} {member.last_name}</div>
+								<p>{member.email}</p>
+								{/* <p>{member.id}</p> */}
+							</div>
+							<div className="card-action">
+								<Link to='/'>back</Link>
+								<Link to='/'>Clock In</Link>
+							</div>
+						</div>
+
+						<MemberOpenTimeEntries member_id={member.id} />
+					</Fragment>
+				);
+			}}
+		</Query>
+	);
+};
+
+Member.propTypes = {
+	match: PropTypes.shape({
+		path: PropTypes.string.isRequired,
+		url: PropTypes.string.isRequired,
+		params: PropTypes.object,
+		isExact: PropTypes.bool,
+	}).isRequired,
 };
 
 export default Member;

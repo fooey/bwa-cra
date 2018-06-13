@@ -1,0 +1,18 @@
+.time-entries {
+	.project {
+		display: flex;
+		flex-flow: row;
+		align-items: center;
+		// border: 1px solid black;
+
+		.material-icons {
+			line-height: inherit;
+			padding: 0;
+			margin: 0;
+		}
+
+		& > * {
+			// border: 1px solid red;
+		}
+	}
+}

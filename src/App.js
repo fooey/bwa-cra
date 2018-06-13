@@ -1,25 +1,37 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { ApolloProvider } from "react-apollo";
+
+import './App.scss';
+
+import client from './lib/apollo-client';
+
+import Navbar from './components/layout/navbar';
 
 import Organization from './organization';
-import logo from './logo.svg';
-import './App.css';
+//
+// import Home from 'src/pages/home';
+// import About from 'src/pages/about';
+// import Topics from 'src/pages/topics';
+// import States from 'src/pages/agencies/states';
 
+const App = () => (
+	<ApolloProvider client={client}>
+		<Router>
+			<Layout />
+		</Router>
+	</ApolloProvider>
+);
 
-class App extends Component {
-	render() {
-		return (
-            <div className="App">
-                <header className="App-header">
-                    <img src={logo} className="App-logo" alt="logo"/>
-                    <h1 className="App-title">Welcome to React</h1>
-                </header>
-                
-                <div className="app-body">
-					<Organization />
-				</div>
-            </div>
-        );
-	}
-}
+const Layout = () => (
+	<div className="App">
+		<Navbar />
+		<div className="container">
+			<div className="app-body">
+				<Organization />
+			</div>
+		</div>
+	</div>
+);
 
 export default App;
