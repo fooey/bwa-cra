@@ -8,6 +8,7 @@
 		"apollo-link-batch-http": "^1.2.2",
 		"apollo-link-context": "^1.0.8",
 		"apollo-link-http": "^1.5.4",
+		"apollo-link-state": "^0.4.1",
 		"cross-env": "^5.2.0",
 		"graphql": "^0.13.2",
 		"graphql-tag": "^2.8.0",
@@ -21,7 +22,7 @@
 	"scripts": {
 		"lint": "esw ./src --watch",
 		"dev": "yarn start",
-		"start": "cross-env NODE_PATH=./ react-scripts start",
+		"start": "cross-env NODE_PATH=./ PORT=3100 react-scripts start",
 		"build": "react-scripts build",
 		"test": "react-scripts test --env=jsdom",
 		"eject": "react-scripts eject"

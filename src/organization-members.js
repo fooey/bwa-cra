@@ -6,17 +6,17 @@ import { Link } from 'react-router-dom';
 
 import Preloader from 'src/components/util/preloader';
 
-const QUERY_ORGANIZATION_MEMBERS = gql `
-    query organizationMembers {
-        members {
-            id
-            first_name
-            last_name
-            email
-            organization_id
-            position_id
-        }
+const QUERY_ORGANIZATION_MEMBERS = gql`
+query organizationMembers {
+    members {
+        id
+        first_name
+        last_name
+        email
+        organization_id
+        position_id
     }
+}
 `;
 
 

@@ -55,21 +55,21 @@ const Member = ({ match }) => {
 								<p>{member.email}</p>
 								{/* <p>{member.id}</p> */}
 							</div>
-							<div className="card-action grey lighten-4">
-								<button className="btn waves-effect waves-light green" type="button">
+							<div className="card-action grey lighten-4" style={{ display: 'flex', flexFlow: 'row nowrap' }} >
+								<Link className="" style={{ display: 'flex', flexFlow: 'row nowrap' }} to="/">
 									<i className="material-icons left">timer</i>
 									<span>Clock In</span>
-								</button>
+								</Link>
 								{' '}
-								<button className="btn waves-effect waves-light amber" type="button">
+								<Link className="" style={{ display: 'flex', flexFlow: 'row nowrap' }} to="/">
 									<i className="material-icons left">av_timer</i>
 									<span>Break</span>
-								</button>
+								</Link>
 								{' '}
-								<button className="btn waves-effect waves-light red" type="button">
+								<Link className="" style={{ display: 'flex', flexFlow: 'row nowrap' }} to="/">
 									<i className="material-icons left">timer_off</i>
 									<span>Clock Out</span>
-								</button>
+								</Link>
 							</div>
 						</div>
 

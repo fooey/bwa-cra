@@ -11,22 +11,24 @@ import Member from './member';
 import Preloader from 'src/components/util/preloader';
 
 const QUERY_ORGANIZATION = gql `
-    query organization {
-        organization {
-        id
-        organization_name
-        owned_by
-        updated_on
-        created_on
-        submitted_on
-        deleted_on
-        }
-    }
+query organization {
+	organization {
+		id
+		organization_name
+		owned_by
+		updated_on
+		created_on
+		submitted_on
+		deleted_on
+	}
+}
 `;
 
 const Organization = () => (
 	<Query query={QUERY_ORGANIZATION}>
 		{({ loading, error, data }) => {
+			console.log('Organization', { loading, error, data });
+
 			if (loading) return <Preloader />;
 			if (error) return <p>Error :(</p>;
 
